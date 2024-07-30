@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>REST API - Golang Microservices</title>
+        <title>API pertama kamu - Golang Microservices</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="pendahuluan.html">Pendahuluan</a></li><li class="chapter-item expanded affix "><a href="project_setup.html">Memulai Project Golang</a></li><li class="chapter-item expanded affix "><li class="part-title">Microservices</li><li class="chapter-item expanded "><a href="rest_api.html" class="active"><strong aria-hidden="true">1.</strong> REST API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="first_api.html"><strong aria-hidden="true">1.1.</strong> API pertama kamu</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="pendahuluan.html">Pendahuluan</a></li><li class="chapter-item expanded affix "><a href="project_setup.html">Memulai Project Golang</a></li><li class="chapter-item expanded affix "><li class="part-title">Microservices</li><li class="chapter-item expanded "><a href="rest_api.html"><strong aria-hidden="true">1.</strong> REST API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="first_api.html" class="active"><strong aria-hidden="true">1.1.</strong> API pertama kamu</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,23 +173,140 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="rest-api"><a class="header" href="#rest-api">REST API</a></h1>
-<p>REST API atau biasa disebut juga dengan RESTful API adalah <em>web application programming interface (Web API)</em> yang biasa digunakan sebagai <em>communication interface</em> antar backend services atau antara FE/Mobile applications dengan backend services. Dari beberapa macam Web API yang ada saat ini, REST API adalah Web API yang paling umum digunakan.</p>
-<p>REST (representational state transfer) adalah merupakan sebuah arsitektur (bukan protocol atau stkamurd) yang menggunakan HTTP Requests untuk dapat mengakses dan menggunakan data yang disediakannya. Karena REST API menggunakan HTTP Requests, maka untuk mengaksesnya kita dapat menggunakan HTTP Method dan yang umum digunakan adalah GET, PUT, POST dan DELETE dimana masing-masing akan mewakili operasi read, update, create dan delete.</p>
-<p>Pada tutorial ini kita akan menggunakan package <a href="https://github.com/go-chi/chi">chi</a> untuk melakukan pengembangan REST API yang akan kita buat. Chi dipilih karena sifatnya yang berupa library (bukan framework), sehingga dapat memberikan flexibilitas lebih kepada kita dalam menyusun code dalam pengembangan service yang akan kita buat.</p>
-<p>Source code pada chapter ini dapat kamu lihat <a href="https://github.com/raspiantoro/golang-marketplace-source-code/tree/main/chapter-02">disini</a></p>
+                        <h1 id="api-pertama-kamu"><a class="header" href="#api-pertama-kamu">API pertama kamu</a></h1>
+<p>Untuk memulai pengembangan REST API menggunakan Chi, kita perlu <em>meng-install</em> package chi pada service yang akan kita bangun. Pada chapter sebelumnya, kita sudah membuat satu service bernama product-svc. Sebelum <em>meng-install</em> chi, pastikan didalam terminal yang kamu gunakan sudah berada difolder product-svc, jalankan perintah berikut untuk berpindah dari root direktori workspace kamu</p>
+<pre><code class="language-bash">cd ./product-svc
+</code></pre>
+<p>Jika kamu sudah berada didalam folder product-svc, ketikan perintah ini untuk meng-install chi kedalam service kamu.</p>
+<pre><code class="language-bash">go get -u github.com/go-chi/chi/v5
+</code></pre>
+<p>Buka file main.go yang sudah kamu buat sebelumnya pada folder product-svc untuk <em>meng-import</em> package chi, json dan http</p>
+<pre><code class="language-go">import (
+    "encoding/json"
+    "net/http"
+	"github.com/go-chi/chi/v5"
+)
+</code></pre>
+<p>Masih pada file main.go tambahkan baris code berikut untuk membuat type baru dengan nama ProductCategory.</p>
+<pre><code class="language-go">type ProductCategory struct {
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
+}
+</code></pre>
+<p>Selanjutnya pada function main, kita perlu membuat chi router untuk <em>meng-handle</em> setiap requests yang datang dari users.</p>
+<pre><code class="language-go">function main(){
+    r := chi.NewRouter()
+}
+</code></pre>
+<p>Baris diatas kita membuat satu instance router yang kita simpan didalam variable <code>r</code>. Selanjutnya kita perlu membuat endpoint <code>/api/product-category</code> dengan method GET untuk mengembalikan daftar kategori product kepada users. Tambahkan baris berikut setelah baris instansiasi chi router.</p>
+<pre><code class="language-go">    r.Get("/api/product-category", func(w http.ResponseWriter, r *http.Request) {
+		// langkah pertama
+        categories := []ProductCategory{
+			{
+				ID:   1,
+				Name: "Alat Tulis",
+			},
+			{
+				ID:   2,
+				Name: "Perlengkapan Rumah Tangga",
+			},
+			{
+				ID:   3,
+				Name: "Fashion",
+			},
+		}
+
+        // langkah kedua
+		result, err := json.Marshal(&amp;categories)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Terjadi kesalahan pada server"))
+			return
+		}
+
+        // langkah ketiga
+		w.WriteHeader(http.StatusOK)
+		w.Write(result)
+	})
+</code></pre>
+<p>Pada baris kode diatas, kita membuat sebuah endpoint GET menggunakan method (function) Get dari chi router. Method Get pada chi router menerima dua parameter sebagai inputan, dimana parameter pertama berupa url path dari endpoint yang kita buat (<code>/api/product-category</code>), dan parameter kedua berupa closure (function) yang akan dieksekusi oleh chi untuk menghandle setiap request yang datang kepada path <code>/api/product-category</code>.</p>
+<p>Terdapat tiga langkah yang kita tulis dalam closure yang kita buat untuk menangani requests dari users. Berikut penjelasan dari masing-masing langkah yang kita buat:</p>
+<ol>
+<li>Pada langkah pertama kita menyiapakan daftar kategori produk dengan menggunakan slice (saat ini kita membuat daftar kategori secara hardcoded, pada chapter integrasi dengan database kita akan belajar bagaimana menampilkan daftar produk yang ada di database)</li>
+<li>Sebelum dapat mengembalikan slice daftar kategori kepada users, kita harus melakukan serialisasi (mengubah object menjadi rangkaian bytes) terlebih dahulu terhadap slice yang sudah kita buat. Untuk melakukannya kita menggunakan function <strong>Marshal</strong> dari package <strong>encoding/json</strong>. Function Marshal menerima parameter berupa pointer dari data yang akan kita serialisasi, dan function tersebut mengembalikan dua return value berupa byte slice dan error. Jika terdapat error pada saat melakukan serialisasi, kita akan mengembalikan <em>response</em> kepada user dengan status code <strong>500</strong> dan pesan kesalahan <strong>Terjadi kesalahan pada server</strong>. Selain itu kita juga melakukan <em>early return</em> saat terjadi error dengan tujuan mencegah agar kode pada langkah ketiga tidak ikut dieksekusi.</li>
+<li>Jika proses serialisasi berhasil, kita akan mengembalikan <em>response</em> sukses kepada user dengan status code <strong>200</strong> dan daftar kategori produk dalam bentuk json.</li>
+</ol>
+<p>Selanjutnya kita perlu melakukan listen dan serve terhadap setiap request http yang datang. Tambahkan baris berikut pada function main</p>
+<pre><code class="language-go">    fmt.Println("your server is running on port 8080")
+	http.ListenAndServe(":8080", r)
+</code></pre>
+<p>Berikut adalah kode lengkap dari seluruh yang kita buat diatas</p>
+<pre><code class="language-go">package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+)
+
+type ProductCategory struct {
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
+}
+
+func main() {
+	r := chi.NewRouter()
+	r.Get("/api/product-category", func(w http.ResponseWriter, r *http.Request) {
+		categories := []ProductCategory{
+			{
+				ID:   1,
+				Name: "Alat Tulis",
+			},
+			{
+				ID:   2,
+				Name: "Perlengkapan Rumah Tangga",
+			},
+			{
+				ID:   3,
+				Name: "Fashion",
+			},
+		}
+
+		result, err := json.Marshal(&amp;categories)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Terjadi kesalahan pada server"))
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Write(result)
+	})
+
+	fmt.Println("your server is running on port 8080")
+	http.ListenAndServe(":8080", r)
+}
+</code></pre>
+<p>Ketik perintah berikut untuk menjalankan service melalui root folder worspace (./golang-marketplace) kamu</p>
+<pre><code class="language-bash">go run ./product-svc
+</code></pre>
+<p>Kamu bisa menggunakan curl untuk melakukan testing terhadap endpoint yang sudah kamu buat</p>
+<pre><code class="language-bash">curl http://localhost:8080/api/product-category
+</code></pre>
+<p>Berikut adalah response yang didapat dari endpoint yang sudah kita buat</p>
+<pre><code>[{"id":1,"name":"Alat Tulis"},{"id":2,"name":"Perlengkapan Rumah Tangga"},{"id":3,"name":"Fashion"}]
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="project_setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="rest_api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="first_api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -197,13 +314,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="project_setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="rest_api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="first_api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
