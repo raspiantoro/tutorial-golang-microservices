@@ -1,9 +1,9 @@
 
 # Memulai Project Golang
 
-Sebelum membuat project golang, Anda harus *men-download* dan *meng-install* Golang terlebih dahulu pada PC/laptop Anda. Bagaimana caara *meng-install* Golang sendiri dapat Anda lihat [disini](https://go.dev/doc/install). Pada saat menulis tutorial ini, Saya menggunakan Golang versi 1.22.5. Untuk memastikan seluruh code yang ada pada tutorial ini dapat berjalan dengan baik di PC/laptop Anda, pastikan Anda memiliki Golang versi 1.22.5 atau yang lebih baru pada PC/laptop Anda.
+Sebelum membuat project golang, kamu harus *men-download* dan *meng-install* Golang terlebih dahulu pada PC/laptop kamu. Bagaimana cara *meng-install* Golang sendiri dapat kamu lihat [disini](https://go.dev/doc/install). Pada saat menulis tutorial ini, Saya menggunakan Golang versi 1.22.5. Untuk memastikan seluruh code yang ada pada tutorial ini dapat berjalan dengan baik di PC/laptop kamu, pastikan kamu memiliki Golang versi 1.22.5 atau yang lebih baru pada PC/laptop kamu.
 
-Seluruh service/komponen yang akan dibuat pada tutorial akan menggunakan pendekatan monorepo, sehingga semua source code akan berada didalam satu folder utama yang sama. Untuk memulai nya kita akan membuat satu folder utama yang bernama "golang-marketplace", untuk membuatnya Anda dapat menulis perintah tersebut pada terminal yang anda gunakan:
+Seluruh service/komponen yang akan dibuat pada tutorial akan menggunakan pendekatan monorepo, sehingga semua source code akan berada didalam satu folder utama yang sama. Untuk memulai nya kita akan membuat satu folder utama yang bernama "golang-marketplace", untuk membuatnya kamu dapat menulis perintah tersebut pada terminal yang kamu gunakan:
 
 ```bash
 mkdir golang-marketplace && cd ./golang-marketplace
@@ -48,6 +48,6 @@ Untuk menjalankan product-svc dari dalam folder workspace (./golang-marketplace)
 go run ./product-svc
 ```
 
-Pada chapter ini Anda telah berhasil membuat golang workspace dan menambahkan module pada golang workspace yg telah dibuat. Code lengkap pada chapter ini dapat Anda lihat [disini](https://github.com/raspiantoro/golang-marketplace-source-code/tree/main/chapter-01)
+Pada chapter ini kamu telah berhasil membuat golang workspace dan menambahkan module pada golang workspace yg telah dibuat. Code lengkap pada chapter ini dapat kamu lihat [disini](https://github.com/raspiantoro/golang-marketplace-source-code/tree/main/chapter-01)
 
 Pada chapter berikutnya, kita akan fokus pada pembahasan pengembangan service menggunakan REST API.
