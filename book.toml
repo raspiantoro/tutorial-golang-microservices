@@ -1,0 +1,7 @@
+[book]
+authors = ["Mario Raspiantoro"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Golang Microservices"
+text-direction = "ltr"
