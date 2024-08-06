@@ -3,8 +3,16 @@
 
 [Pendahuluan](./pendahuluan.md)
 
-[Memulai Project Golang](./project_setup.md)
+--- 
+
+# Golang Project
+- [Memulai Project Baru](./project_setup.md)
+
+---
 
 # Microservices 
 - [REST API](./rest_api.md)
-    - [API pertama kamu](./first_api.md)
+    - [First API](./first_api.md)
+    - [Code Organizing](./code_organizing.md)
+
+-----------

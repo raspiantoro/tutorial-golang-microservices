@@ -1,6 +1,8 @@
 
 # Memulai Project Golang
 
+<div style="text-align: justify">   
+
 Sebelum membuat project golang, kamu harus *men-download* dan *meng-install* Golang terlebih dahulu pada PC/laptop kamu. Bagaimana cara *meng-install* Golang sendiri dapat kamu lihat [disini](https://go.dev/doc/install). Pada saat menulis tutorial ini, Saya menggunakan Golang versi 1.22.5. Untuk memastikan seluruh code yang ada pada tutorial ini dapat berjalan dengan baik di PC/laptop kamu, pastikan kamu memiliki Golang versi 1.22.5 atau yang lebih baru pada PC/laptop kamu.
 
 Seluruh service/komponen yang akan dibuat pada tutorial akan menggunakan pendekatan monorepo, sehingga semua source code akan berada didalam satu folder utama yang sama. Untuk memulai nya kita akan membuat satu folder utama yang bernama "golang-marketplace", untuk membuatnya kamu dapat menulis perintah tersebut pada terminal yang kamu gunakan:
@@ -48,6 +50,8 @@ Untuk menjalankan product-svc dari dalam folder workspace (./golang-marketplace)
 go run ./product-svc
 ```
 
-Pada chapter ini kamu telah berhasil membuat golang workspace dan menambahkan module pada golang workspace yg telah dibuat. Code lengkap pada chapter ini dapat kamu lihat [disini](https://github.com/raspiantoro/golang-marketplace-source-code/tree/main/chapter-01)
+Pada chapter ini kamu telah berhasil membuat golang workspace dan menambahkan module pada golang workspace yg telah dibuat. Kode lengkap pada chapter ini dapat kamu lihat [disini](https://github.com/raspiantoro/golang-microservices-source-code/tree/chapter-01) dan untuk perubahan/penambahan file yang kita lakukan, detailnya dapat kamu lihat pada link [Pull Request](https://github.com/raspiantoro/golang-microservices-source-code/pull/1/files) ini.
 
-Pada chapter berikutnya, kita akan fokus pada pembahasan pengembangan service menggunakan REST API.
+Pada chapter berikutnya, kita akan fokus pada pembahasan pengembangan service menggunakan REST API.   
+
+</div>

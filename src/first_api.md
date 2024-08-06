@@ -1,5 +1,7 @@
 
-# API pertama kamu
+# First API
+
+<div style="text-align: justify">
 
 Untuk memulai pengembangan REST API menggunakan Chi, kita perlu *meng-install* package chi pada service yang akan kita bangun. Pada chapter sebelumnya, kita sudah membuat satu service bernama product-svc. Sebelum *meng-install* chi, pastikan didalam terminal yang kamu gunakan sudah berada difolder product-svc, jalankan perintah berikut untuk berpindah dari root direktori workspace kamu
 
@@ -155,3 +157,7 @@ Berikut adalah response yang didapat dari endpoint yang sudah kita buat
 ```
 [{"id":1,"name":"Alat Tulis"},{"id":2,"name":"Perlengkapan Rumah Tangga"},{"id":3,"name":"Fashion"}]
 ```
+
+Kode lengkap pada chapter ini dapat kamu lihat [disini](https://github.com/raspiantoro/golang-microservices-source-code/tree/chapter-02.01) dan untuk perubahan/penambahan file yang kita lakukan, detailnya dapat kamu lihat pada link [Pull Request](https://github.com/raspiantoro/golang-microservices-source-code/pull/2/files) ini 
+
+</div>
